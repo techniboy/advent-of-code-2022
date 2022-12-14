@@ -50,5 +50,40 @@ score = calc_score_part1(rounds)
 print(score)
 
 # part 2
-win_condition = ""
+score_map: Dict[str, int] = {
+  "A": 1,
+  "B": 2,
+  "C": 3,
+}
 
+win_condition: Dict[str, str] = {
+  "A": "B",
+  "B": "C",
+  "C": "A",
+}
+
+lose_condition: Dict[str, str] = {
+  "A": "C",
+  "B": "A",
+  "C": "B"
+}
+
+def calc_score_part2(rounds: List[Tuple[str, str]]) -> int:
+  score = 0
+  for r in rounds:
+    opp = r[0]
+    you = ""
+    outcome = r[1]
+    if outcome == "Y": # Y = draw
+      score += DRAW
+      you = opp
+    elif outcome == "Z": # Z = win
+      score += WIN
+      you = win_condition[opp]
+    else:
+      you = lose_condition[opp]
+    score += score_map[you]
+  return score
+
+score = calc_score_part2(rounds)
+print(score)
