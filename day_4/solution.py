@@ -26,3 +26,15 @@ def get_full_overlap() -> int:
 
 part_a = get_full_overlap()
 print(part_a)
+
+# part B
+def get_partial_overlap() -> int:
+    count = 0
+    for pair in elf_pair:
+        overlap: Set[int] = pair[0].intersection(pair[1])
+        if overlap != set():
+            count += 1
+    return count
+
+part_b = get_partial_overlap()
+print(part_b)
